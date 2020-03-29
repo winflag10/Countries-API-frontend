@@ -27,13 +27,14 @@ function initialLoad(){
 
 
 function updateLoad(e){
-	
+
+	var filter = document.getElementById("active-filter").innerHTML
 	var holder = document.getElementById("card-holder")
-	document.getElementById("card-loader").style.display= "block"
 
 	holder.style.display= "none"
 	holder.innerHTML = ""
 
+	document.getElementById("card-loader").style.display= "block"
 	document.getElementById("no-results-container").style.display= "none"
 
 	let xmlhttp = new XMLHttpRequest();
@@ -41,7 +42,8 @@ function updateLoad(e){
 		if (xmlhttp.readyState == XMLHttpRequest.DONE){
 		  	let response = JSON.parse(xmlhttp.responseText);
 		  	for (let i = 0; i < response.length; i++) { 
-		  		var cardTemplate = `<div class="card" onclick="openDetails(this.children[1].firstElementChild)">
+		  		if (response[i].region == filter || filter == "No Filter" || filter == "Filter by region"){
+		  			var cardTemplate = `<div class="card" onclick="openDetails(this.children[1].firstElementChild)">
 	<img src=${response[i].flag}>
 	<div class="card-content">
 		<h1>${response[i].name}</h1>
@@ -50,7 +52,8 @@ function updateLoad(e){
 		<p>Capital: <span>${response[i].capital}</span></p>
 	</div>
 </div>`
-				holder.innerHTML += cardTemplate
+					holder.innerHTML += cardTemplate
+				}
 			}
 			document.getElementById("card-loader").style.display= "none"
 			if(response[0] !== undefined){
@@ -70,7 +73,6 @@ function updateLoad(e){
 
 function openDetails(e){
 	var name = e.innerHTML
-
 	let xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if (xmlhttp.readyState == XMLHttpRequest.DONE){
@@ -152,4 +154,21 @@ function getNames(){
 		xmlhttp.send();
 	}
 
+}
+
+
+function toggleDropdown(){
+	options = document.getElementById("filter-options")
+	if(options.style.display == "flex"){
+		options.style.display = "none"
+		document.getElementById("filter-icon").style.transform = "rotate(0deg)"
+	}else{
+		options.style.display = "flex"
+		document.getElementById("filter-icon").style.transform = "rotate(180deg)"
+	}
+}
+
+function chooseFilter(e){
+	document.getElementById("active-filter").innerHTML = e.children[0].innerHTML
+	updateLoad(document.getElementById("search"))
 }

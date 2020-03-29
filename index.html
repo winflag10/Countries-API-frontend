@@ -23,15 +23,16 @@
             <i class="fas fa-search fa-lg" id="search-icon"></i>
             <input type="text" name="search" id="search" autocomplete="off" placeholder="Search for a country..." onchange="updateLoad(this)">
           </div>
-          <div class="input-container filter">
-            <select id="filter">
-              <option>Filter By Region</option>
-              <option>Africa</option>
-              <option>America</option>
-              <option>Asia</option>
-              <option>Europe</option>
-              <option>Oceana</option>
-            </select>
+          <div class="input-container filter" onclick="toggleDropdown()">
+            <p id="active-filter">Filter by region</p>
+            <div class="input-container options" id="filter-options">
+              <div class="option-container option-top" onclick="chooseFilter(this)"><p class="option">Africa</p></div>
+              <div class="option-container" onclick="chooseFilter(this)"><p class="option">Americas</p></div>
+              <div class="option-container" onclick="chooseFilter(this)"><p class="option">Asia</p></div>
+              <div class="option-container" onclick="chooseFilter(this)"><p class="option">Europe</p></div>
+              <div class="option-container" onclick="chooseFilter(this)"><p class="option">Oceania</p></div>
+              <div class="option-container option-bottom" onclick="chooseFilter(this)"><p class="option">No Filter</p></div>
+            </div>
             <i class="fas fa-chevron-down fa-md" id="filter-icon"></i>
           </div>
         </div>
