@@ -6,7 +6,7 @@ function initialLoad(){
 		  	let response = JSON.parse(xmlhttp.responseText);
 		  	for (let i = 0; i < response.length; i++) { 
 		  		var cardTemplate = `<div class="card" onclick="openDetails(this.children[1].firstElementChild)">
-	<img src=${response[i].flag}>
+	<img src=${response[i].flag} alt="flag">
 	<div class="card-content">
 		<h1>${response[i].name}</h1>
 		<p>Population: <span>${response[i].population}</span></p>
@@ -44,7 +44,7 @@ function updateLoad(e){
 		  	for (let i = 0; i < response.length; i++) { 
 		  		if (response[i].region == filter || filter == "No Filter" || filter == "Filter by region"){
 		  			var cardTemplate = `<div class="card" onclick="openDetails(this.children[1].firstElementChild)">
-	<img src=${response[i].flag}>
+	<img src=${response[i].flag} alt="flag">
 	<div class="card-content">
 		<h1>${response[i].name}</h1>
 		<p>Population: <span>${response[i].population}</span></p>
