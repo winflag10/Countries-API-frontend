@@ -9,7 +9,7 @@ function initialLoad(){
 	<img src=${response[i].flag} alt="flag">
 	<div class="card-content">
 		<h1>${response[i].name}</h1>
-		<p>Population: <span>${response[i].population}</span></p>
+		<p>Population: <span>${formatNumber(response[i].population)}</span></p>
 		<p>Region: <span>${response[i].region}</span></p>
 		<p>Capital: <span>${response[i].capital}</span></p>
 	</div>
@@ -47,7 +47,7 @@ function updateLoad(e){
 	<img src=${response[i].flag} alt="flag">
 	<div class="card-content">
 		<h1>${response[i].name}</h1>
-		<p>Population: <span>${response[i].population}</span></p>
+		<p>Population: <span>${formatNumber(response[i].population)}</span></p>
 		<p>Region: <span>${response[i].region}</span></p>
 		<p>Capital: <span>${response[i].capital}</span></p>
 	</div>
@@ -56,7 +56,7 @@ function updateLoad(e){
 				}
 			}
 			document.getElementById("card-loader").style.display= "none"
-			if(response[0] !== undefined){
+			if(response[0] !== undefined && holder.innerHTML != ""){
 				document.getElementById("card-holder").style.display= "flex"
 			}else{
 				document.getElementById("no-results-container").style.display= "flex"
@@ -82,7 +82,7 @@ function openDetails(e){
 		  	document.getElementById("details-flag").src = response.flag
 		  	document.getElementById("details-name").innerHTML = response.name
 		  	document.getElementById("nativeName").innerHTML = response.nativeName
-		  	document.getElementById("population").innerHTML = response.population
+		  	document.getElementById("population").innerHTML = formatNumber(response.population)
 		  	document.getElementById("region").innerHTML = response.region
 		  	document.getElementById("sub-region").innerHTML = response.subregion
 		  	document.getElementById("capital").innerHTML = response.capital
@@ -171,4 +171,9 @@ function toggleDropdown(){
 function chooseFilter(e){
 	document.getElementById("active-filter").innerHTML = e.children[0].innerHTML
 	updateLoad(document.getElementById("search"))
+}
+
+
+function formatNumber(num) {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }

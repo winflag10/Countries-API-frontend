@@ -427,6 +427,16 @@ span{
 		display: block;
 		margin-top: 5%;
 	}
+
+	header h1{
+		width:100%;
+		text-align: center;
+	}
+
+	header{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }	
 
 
@@ -437,5 +447,9 @@ span{
 
 	.input-container.search{
 		width:95%;
+	}
+
+	h1{
+		font-size: 1.5em;
 	}
 }
